@@ -98,6 +98,14 @@
     <string name="action_find">Find in page</string>
     <string name="action_find_next">Find next</string>
     <string name="action_find_previous">Find previous</string>
+    
+    <!-- Background keep alive feature -->
+    <string name="pref_title_keep_alive_background">Keep pages alive in background</string>
+    <string name="pref_summary_keep_alive_background">Prevent pages from detecting when you leave the browser. Useful for staying online on websites.</string>
+    <string name="background_browser_channel_name">Background Browser</string>
+    <string name="background_browser_channel_description">Keeps browser running in background</string>
+    <string name="background_browser_notification_title">Fulguris is running in background</string>
+    <string name="background_browser_notification_text">Keeping your pages alive</string>
     <string name="action_find_selection">Find selection</string>
     <string name="action_print">Print</string>
     <string name="action_translate">Translate</string>

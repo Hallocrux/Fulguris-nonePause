@@ -46,4 +46,5 @@
     <string name="pref_key_ssl_dialog">pref_key_ssl_dialog</string>
     <string name="pref_key_use_js_block">pref_key_use_js_block</string>
     <string name="pref_key_use_site_block">pref_key_use_site_block</string>
+    <string name="pref_key_keep_alive_background">pref_key_keep_alive_background</string>
 </resources>

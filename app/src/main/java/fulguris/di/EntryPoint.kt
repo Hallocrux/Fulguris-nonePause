@@ -56,6 +56,7 @@ interface HiltEntryPoint {
     val textReflowJs: TextReflow
     val invertPageJs: InvertPage
     val setMetaViewport: SetMetaViewport
+    val keepPageVisibleJs: fulguris.js.KeepPageVisible
     val homePageFactory: HomePageFactory
     val abpBlockerManager: AbpBlockerManager
     val noopBlocker: NoOpAdBlocker

@@ -82,6 +82,7 @@ class WebPageClient(
     val textReflowJs: TextReflow = hiltEntryPoint.textReflowJs
     val invertPageJs: InvertPage = hiltEntryPoint.invertPageJs
     val setMetaViewport: SetMetaViewport = hiltEntryPoint.setMetaViewport
+    val keepPageVisibleJs: fulguris.js.KeepPageVisible = hiltEntryPoint.keepPageVisibleJs
     val homePageFactory: HomePageFactory = hiltEntryPoint.homePageFactory
     val abpBlockerManager: AbpBlockerManager = hiltEntryPoint.abpBlockerManager
     val noopBlocker: NoOpAdBlocker = hiltEntryPoint.noopBlocker
@@ -276,6 +277,12 @@ class WebPageClient(
         if (webPageTab.invertPage) {
             Timber.w("evaluateJavascript: invert page colors")
             view.evaluateJavascript(invertPageJs.provideJs(), null)
+        }
+        
+        // Inject JavaScript to keep page visible if enabled
+        if (userPreferences.keepAliveBackground) {
+            Timber.d("evaluateJavascript: keep page visible")
+            view.evaluateJavascript(keepPageVisibleJs.provideJs(), null)
         }
 /*        // TODO: element hiding does not work
         //  maybe because of the late injection?

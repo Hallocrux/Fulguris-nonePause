@@ -454,6 +454,11 @@ class UserPreferences @Inject constructor(
      */
     var scrollbarSize by preferences.floatResPreference(R.string.pref_key_scrollbar_size, R.integer.pref_default_scrollbar_size)
 
+    /**
+     * Keep pages alive in background by preventing WebView pause and overriding page visibility API
+     */
+    var keepAliveBackground by preferences.booleanPreference(R.string.pref_key_keep_alive_background, false)
+
 }
 
 // SL: Looks like those are the actual shared property keys thus overriding what ever was defined in our XML

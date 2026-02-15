@@ -104,6 +104,7 @@ import fulguris.notifications.IncognitoNotification
 import fulguris.permissions.PermissionsManager
 import fulguris.search.SearchEngineProvider
 import fulguris.search.SuggestionsAdapter
+import fulguris.service.BackgroundBrowserService
 import fulguris.settings.NewTabPosition
 import fulguris.settings.fragment.BottomSheetDialogFragment
 import fulguris.settings.fragment.DisplaySettingsFragment.Companion.MAX_BROWSER_TEXT_SIZE
@@ -3341,6 +3342,11 @@ abstract class WebBrowserActivity : ThemedBrowserActivity(),
 
         tabsManager.pauseAll()
 
+        // Start background service if keep alive is enabled
+        if (userPreferences.keepAliveBackground) {
+            BackgroundBrowserService.start(this)
+        }
+
         // Dismiss any popup menu
         iMenuCustom.dismiss()
         iMenuSessions.dismiss()
@@ -3445,6 +3451,11 @@ abstract class WebBrowserActivity : ThemedBrowserActivity(),
     override fun onDestroy() {
         Timber.d("onDestroy")
 
+        // Stop background service if it's running
+        if (userPreferences.keepAliveBackground) {
+            BackgroundBrowserService.stop(this)
+        }
+
         // Break cycling references that would trip GC
         // Must be needed since View holds a reference to this as a context
         // Though I'm pretty sure this activity is locked in some other ways, probably a lost cause at this stage...
@@ -3485,6 +3496,12 @@ abstract class WebBrowserActivity : ThemedBrowserActivity(),
         updateConfigurationSharedPreferences()
         super.onResume()
         Timber.d("onResume")
+        
+        // Stop background service when returning to foreground
+        if (userPreferences.keepAliveBackground) {
+            BackgroundBrowserService.stop(this)
+        }
+        
         // Check if some settings changes require application restart
         if (swapBookmarksAndTabs != userPreferences.bookmarksAndTabsSwapped
                 || analytics != userPreferences.analytics

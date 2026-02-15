@@ -844,8 +844,13 @@ class WebPageTab(
      * Pause the current WebView instance.
      */
     fun onPause() {
-        webView?.onPause()
-        Timber.d("WebView onPause: ${webView?.id}")
+        // Don't pause WebView if keep alive background is enabled
+        if (!userPreferences.keepAliveBackground) {
+            webView?.onPause()
+            Timber.d("WebView onPause: ${webView?.id}")
+        } else {
+            Timber.d("WebView onPause skipped (keep alive enabled): ${webView?.id}")
+        }
     }
 
     /**

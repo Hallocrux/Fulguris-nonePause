@@ -149,6 +149,15 @@
         android:title="@string/settings_advanced"
         app:singleLineTitle="false">
 
+        <x.SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/pref_key_keep_alive_background"
+            android:title="@string/pref_title_keep_alive_background"
+            android:summary="@string/pref_summary_keep_alive_background"
+            app:icon="@drawable/ic_visibility"
+            app:iconSpaceReserved="false"
+            app:singleLineTitle="false" />
+
         <Preference
             android:key="download"
             android:title="@string/download"
